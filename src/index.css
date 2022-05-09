@@ -1,0 +1,69 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .cc-container {
+    @apply mx-auto w-4/6;
+  }
+
+  .cc-input {
+    @apply block w-full
+    py-2 px-4
+    outline-none border border-gray-300 rounded
+    focus:border-yellow-400 focus:ring-1 focus:ring-yellow-400;
+  }
+
+  .cc-input-error {
+    @apply border-pink-500 focus:border-pink-500 focus:ring-pink-500;
+  }
+
+  .cc-button {
+    @apply px-4 py-2 rounded-md font-medium;
+  }
+
+  .cc-button-variant-primary {
+    @apply bg-yellow-400 hover:bg-yellow-500;
+  }
+
+  .cc-button-variant-light {
+    @apply border border-gray-300 bg-slate-100 hover:bg-slate-200;
+  }
+
+  .cc-button-variant-dark {
+    @apply bg-black text-white hover:bg-gray-800;
+  }
+
+  .cc-badge {
+    @apply text-xs font-semibold px-2.5 py-0.5 rounded;
+  }
+
+  .cc-badge-variant-green {
+    @apply text-green-800 bg-green-100;
+  }
+
+  .cc-badge-variant-red {
+    @apply text-red-800 bg-red-100;
+  }
+
+  .cc-badge-icon {
+    @apply inline-flex items-center p-1 mr-2 text-sm font-semibold rounded-full;
+  }
+
+  .cc-badge-icon-variant-indigo {
+    @apply bg-indigo-100 text-indigo-800;
+  }
+}
+
+body {
+  margin: 0;
+  font-family: 'Cinzel', serif;
+  font-family: 'Inter', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
