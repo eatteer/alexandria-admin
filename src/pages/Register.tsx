@@ -24,7 +24,7 @@ export const Register: React.FC<Props> = ({ closeModal, setBooks }) => {
 
   return (
     <Formik
-      initialValues={{ isbn13: '', stock: 1, price: 1, isForSale: 'true' }}
+      initialValues={{ isbn13: '', stock: 10, price: 5000, isForSale: 'true' }}
       validate={(values) => {
         let errors: any = {}
         if (!values.isbn13) {
@@ -61,11 +61,11 @@ export const Register: React.FC<Props> = ({ closeModal, setBooks }) => {
             </div>
             <div>
               <label className='block mb-1 font-medium'>Stock</label>
-              <InputField type='number' name='stock' min={1} />
+              <InputField type='number' name='stock' min={10} />
             </div>
             <div>
               <label className='block mb-1 font-medium'>Price</label>
-              <InputField type='number' name='price' min={1} />
+              <InputField type='number' name='price' min={5000} />
             </div>
             <div>
               <label className='block mb-1 font-medium'>For sale</label>
