@@ -1,7 +1,9 @@
 import { useField } from 'formik'
 
-export const InputSelect = ({ ...props }) => {
-  const [field, meta] = useField(props.name)
+export const InputSelect = (
+  props: React.InputHTMLAttributes<HTMLSelectElement>
+) => {
+  const [field, meta] = useField(props.name!)
   return (
     <div>
       <select
