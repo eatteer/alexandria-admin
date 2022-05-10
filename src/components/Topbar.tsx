@@ -3,9 +3,9 @@ import { NavLink } from 'react-router-dom'
 
 export const Topbar: React.FC = () => {
   return (
-    <nav className='top-bar px-40 justify-between'>
+    <nav className='top-bar justify-between'>
       <div className='flex items-center'>
-        <h2 className='text-3xl font-[Cinzel] font-bold mr-8'>Alexandria</h2>
+        {/* <h2 className='text-3xl font-[Cinzel] font-bold mr-8'>Alexandria</h2> */}
         <NavLink
           className={({ isActive }) =>
             `p-2 font-medium border-b-2 ${

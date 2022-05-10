@@ -55,7 +55,7 @@ export const Edit: React.FC<Props> = ({ book, closeModal, setBooks }) => {
       >
         {() => (
           <Form>
-            <div className='mb-8 space-y-4'>
+            <div className='mb-8 space-y-2'>
               <div>
                 <label className='block mb-1 font-medium'>Stock</label>
                 <InputField type='number' name='stock' />

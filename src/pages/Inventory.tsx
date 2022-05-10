@@ -37,7 +37,7 @@ export const Inventory: React.FC = () => {
     <>
       <Topbar />
       <div>
-        <div className='container mt-8'>
+        <div className='max-w-5xl min-w-5xl m-auto mt-8'>
           <button className='button button-primary' onClick={openRegisterModal}>
             Register book
             <span>
