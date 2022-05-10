@@ -1,8 +1,15 @@
 import { Form, Formik } from 'formik'
 import { InputField } from '../components/InputField'
-import { auth } from '../services/usersServices'
+import { auth } from '../services/users-services'
+import { login } from '../redux/user/actions'
+import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
+import { toastErrorOptions } from '../components/toast/toast-options'
+import { useNavigate } from 'react-router-dom'
 
 export const SignIn: React.FC = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate()
   return (
     <Formik
       initialValues={{ username: '', password: '' }}
@@ -22,14 +29,16 @@ export const SignIn: React.FC = () => {
         const { username, password } = values
         try {
           const user = await auth(username, password)
-          console.log(user)
-        } catch (error) {
+          dispatch(login(user))
+          navigate('/inventory')
+        } catch (error: any) {
+          toast.error(error.message, toastErrorOptions)
           console.error(error)
         }
       }}
     >
       {() => (
-        <div className='cc-container mt-16 flex justify-center'>
+        <div className='container mt-16 flex justify-center'>
           <Form className='w-96 p-8 bg-white border rounded-lg drop-shadow-md'>
             <h2 className='mb-2 text-4xl text-center font-bold'>Sign in</h2>
             <h3 className='mb-4 text-lg text-center text-gray-500 '>
@@ -42,10 +51,7 @@ export const SignIn: React.FC = () => {
                 name='password'
                 placeholder='Password'
               />
-              <button
-                className='cc-button cc-button-variant-primary w-full'
-                type='submit'
-              >
+              <button className='button button-primary w-full' type='submit'>
                 Sign in
               </button>
             </div>

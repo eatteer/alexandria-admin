@@ -1,8 +1,9 @@
 import { Form, Formik } from 'formik'
+import { GrFormEdit } from 'react-icons/gr'
 import { InputField } from '../components/InputField'
 import { InputSelect } from '../components/InputSelect'
 import { Book } from '../entities/Book'
-import { edit } from '../services/booksService'
+import { edit } from '../services/books-service'
 
 type Props = {
   book: Book
@@ -23,7 +24,7 @@ export const Edit: React.FC<Props> = ({ book, closeModal, setBooks }) => {
   return (
     <div>
       <div className='flex flex-col items-center'>
-        <h2 className='text-2xl font-bold mb-2 text-center'>{book.title}</h2>
+        <h2 className='text-3xl font-bold mb-2 text-center'>{book.title}</h2>
         <h3 className='text-lg text-gray-500 mb-4 text-center'>
           {book.isbn13}
         </h3>
@@ -72,10 +73,7 @@ export const Edit: React.FC<Props> = ({ book, closeModal, setBooks }) => {
                 </InputSelect>
               </div>
             </div>
-            <button
-              className='cc-button cc-button-variant-primary w-full'
-              type='submit'
-            >
+            <button className='button button-primary w-full' type='submit'>
               Edit book
             </button>
           </Form>

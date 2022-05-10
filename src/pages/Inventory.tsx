@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
-import { GrFormEdit } from 'react-icons/gr'
-import { Modal } from '../components/Modal'
 import { Book } from '../entities/Book'
 import useModal from '../hooks/useModal'
-import { Edit } from './Edit'
+import { Modal } from '../components/Modal'
+import { IoMdAddCircleOutline } from 'react-icons/io'
+import { GrFormEdit } from 'react-icons/gr'
 import { Register } from './Register'
-
+import { Edit } from './Edit'
+import { Topbar } from '../components/Topbar'
 export const Inventory: React.FC = () => {
+  const [book, setBook] = useState<Book | null>(null)
+  const [books, setBooks] = useState<Book[]>([])
+
   const {
     isOpen: isOpenEditModal,
     openModal: openEditModal,
@@ -17,9 +21,6 @@ export const Inventory: React.FC = () => {
     openModal: openRegisterModal,
     closeModal: closeRegisterModal,
   } = useModal()
-
-  const [book, setBook] = useState<Book | null>(null)
-  const [books, setBooks] = useState<Book[]>([])
 
   useEffect(() => {
     const searchAllBooks = async () => {
@@ -34,19 +35,20 @@ export const Inventory: React.FC = () => {
 
   return (
     <>
+      <Topbar />
       <div>
-        <div className='cc-container mt-8'>
-          <button
-            className='cc-button cc-button-variant-primary'
-            onClick={openRegisterModal}
-          >
+        <div className='container mt-8'>
+          <button className='button button-primary' onClick={openRegisterModal}>
             Register book
+            <span>
+              <IoMdAddCircleOutline size={24} />
+            </span>
           </button>
           <table className='w-full border-collapse table-auto mt-8'>
             <thead className='bg-gray-200'>
               <tr className='border-b border-b-gray-300 text-gray-800 text-left hover:bg-gray-200'>
                 <th className='p-2'>Thumbnail</th>
-                <th>Identifier</th>
+                <th>ISBN13</th>
                 <th>Title</th>
                 <th>For sale</th>
                 <th>Stock</th>
@@ -59,8 +61,8 @@ export const Inventory: React.FC = () => {
                 {books.map((book) => {
                   const isForSale = book.bookSaleData.isForSale ? 'Yes' : 'No'
                   const variant = book.bookSaleData.isForSale
-                    ? 'cc-badge-variant-green'
-                    : 'cc-badge-variant-red'
+                    ? 'badge-green'
+                    : 'badge-red'
                   return (
                     <tr
                       className='border-b border-b-gray-300 text-gray-800 text-left hover:bg-gray-200'
@@ -76,15 +78,13 @@ export const Inventory: React.FC = () => {
                       <td>{book.isbn13}</td>
                       <td>{book.title}</td>
                       <td>
-                        <span className={`cc-badge ${variant}`}>
-                          {isForSale}
-                        </span>
+                        <span className={`badge ${variant}`}>{isForSale}</span>
                       </td>
                       <td>{book.bookSaleData.stock}</td>
-                      <td>{book.bookSaleData.price}</td>
+                      <td>${book.bookSaleData.price}</td>
                       <td>
                         <button
-                          className='cc-badge-icon cc-badge-icon-variant-indigo'
+                          className='badge-button badge-button-blue'
                           onClick={() => {
                             setBook(book)
                             openEditModal()
