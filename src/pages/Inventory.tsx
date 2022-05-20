@@ -7,6 +7,9 @@ import { GrFormEdit } from 'react-icons/gr'
 import { Register } from './Register'
 import { Edit } from './Edit'
 import { Topbar } from '../components/Topbar'
+import { InputField } from '../components/InputField'
+import { Form, Formik } from 'formik'
+import { findBooksByKeyword } from '../services/books-service'
 export const Inventory: React.FC = () => {
   const [book, setBook] = useState<Book | null>(null)
   const [books, setBooks] = useState<Book[]>([])
@@ -24,7 +27,7 @@ export const Inventory: React.FC = () => {
 
   useEffect(() => {
     const searchAllBooks = async () => {
-      const response = await fetch('http://localhost:3100/books')
+      const response = await fetch('http://localhost:3003/books')
       if (response.ok) {
         const books = await response.json()
         setBooks(books)
@@ -37,13 +40,37 @@ export const Inventory: React.FC = () => {
     <>
       <Topbar />
       <div>
-        <div className='max-w-5xl min-w-5xl m-auto mt-8'>
-          <button className='button button-primary' onClick={openRegisterModal}>
+        <div className='max-w-5xl min-w-5xl m-auto my-8'>
+          <button
+            className='button button-primary mb-4'
+            onClick={openRegisterModal}
+          >
             Register book
             <span>
               <IoMdAddCircleOutline size={24} />
             </span>
           </button>
+          <Formik
+            initialValues={{ keyword: '' }}
+            onSubmit={async ({ keyword }) => {
+              try {
+                const books = await findBooksByKeyword(keyword)
+                setBooks(books)
+              } catch (error) {
+                console.error(error)
+              }
+            }}
+          >
+            {() => (
+              <Form>
+                <InputField
+                  name='keyword'
+                  placeholder='Search books'
+                  showError={false}
+                />
+              </Form>
+            )}
+          </Formik>
           <table className='w-full border-collapse table-auto mt-8'>
             <thead className='bg-gray-200'>
               <tr className='border-b border-b-gray-300 text-gray-800 text-left hover:bg-gray-200'>

@@ -1,7 +1,15 @@
 import { IoMdLogOut } from 'react-icons/io'
+import { useDispatch } from 'react-redux'
 import { NavLink } from 'react-router-dom'
+import { logout } from '../redux/user/actions'
 
 export const Topbar: React.FC = () => {
+  const dispatch = useDispatch()
+
+  const handleLogout = () => {
+    dispatch(logout())
+  }
+
   return (
     <nav className='top-bar justify-between'>
       <div className='flex items-center'>
@@ -27,7 +35,7 @@ export const Topbar: React.FC = () => {
           Reports
         </NavLink>
       </div>
-      <button className='button button-primary'>
+      <button className='button button-primary' onClick={handleLogout}>
         Logout
         <span>
           <IoMdLogOut size={24} />

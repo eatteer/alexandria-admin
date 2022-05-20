@@ -58,11 +58,11 @@ export const Edit: React.FC<Props> = ({ book, closeModal, setBooks }) => {
             <div className='mb-8 space-y-2'>
               <div>
                 <label className='block mb-1 font-medium'>Stock</label>
-                <InputField type='number' name='stock' />
+                <InputField type='number' name='stock' min={0}/>
               </div>
               <div>
                 <label className='block mb-1 font-medium'>Price</label>
-                <InputField type='number' name='price' />
+                <InputField type='number' name='price' min={5000}/>
               </div>
               <div>
                 <label className='block mb-1 font-medium'>For sale</label>
